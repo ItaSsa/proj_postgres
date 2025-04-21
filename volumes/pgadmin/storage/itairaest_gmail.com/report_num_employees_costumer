@@ -1,0 +1,9 @@
+-- Creates a report showing the number of employees and customers 
+-- in each city (71 rows)
+select 	COALESCE(e.city, c.city) AS city,
+	count(e.employee_id),
+	count(c.customer_id)
+from employees e 
+	full outer join customers c on
+		e.city = c.city
+group by COALESCE(e.city, c.city)

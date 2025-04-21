@@ -1,0 +1,11 @@
+/*Calculate:
+How many unique products are there?
+How many products in total?
+What is the total amount paid?*/
+
+select order_id,
+	    count(order_id) OVER (PARTITION BY order_id) as dist_prod,
+		sum(quantity)  OVER (PARTITION BY order_id) as qtt_prod,
+		sum(quantity * unit_price) OVER (PARTITION BY order_id) total_amount
+from order_details
+where order_id = 11038;

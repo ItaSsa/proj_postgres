@@ -1,0 +1,9 @@
+-- Creates a report showing the number of employees and customers 
+-- in each city that has employees (5 rows)
+select e.city,
+		count(e.employee_id) as number_employees,
+		count(c.customer_id)  as number_customers
+from employees as e 
+left join customers as c
+on e.city = c.city
+group by e.city

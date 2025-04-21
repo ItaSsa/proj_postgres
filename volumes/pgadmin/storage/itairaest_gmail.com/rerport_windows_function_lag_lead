@@ -1,0 +1,22 @@
+/*
+LAG(), LEAD()
+LAG():
+Allows you to access the value of the previous row within a result set. 
+This is particularly useful for making comparisons with the current row 
+or identifying trends over time.
+
+LEAD():
+Allows you to access the value of the next row within a result set,
+enabling comparisons with the following row.
+*/
+SELECT 
+  customer_id, 
+  TO_CHAR(order_date, 'YYYY-MM-DD') AS order_date, 
+  shippers.company_name AS shipper_name, 
+  LAG(freight) OVER (PARTITION BY customer_id ORDER BY order_date DESC) AS previous_order_freight, 
+  freight AS order_freight, 
+  LEAD(freight) OVER (PARTITION BY customer_id ORDER BY order_date DESC) AS next_order_freight
+FROM 
+  orders
+JOIN 
+  shippers ON shippers.shipper_id = orders.ship_via;

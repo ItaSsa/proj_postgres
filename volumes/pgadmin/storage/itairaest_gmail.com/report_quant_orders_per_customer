@@ -1,0 +1,9 @@
+-- Creates a report showing the total number of orders per customer since December 31, 1996.
+-- The report should return only rows where the total number of orders is greater than 15 (5 rows)
+select customer_id,
+		count(distinct order_id) as quant_orders
+from orders o
+where order_date >= '1996-12-31'
+group by customer_id
+having  count(distinct order_id) > 15
+order by quant_orders

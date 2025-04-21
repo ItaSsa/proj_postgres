@@ -1,0 +1,11 @@
+-- Creates a report showing the total quantity of ordered products.
+-- Shows only records for products where the ordered quantity is less than 200 (5 rows)
+select  od.product_id,
+		p.product_name,
+		sum(od.quantity) as total_quantity
+from order_details od 
+		join products as p 
+		on od.product_id = p.product_id
+group by od.product_id,p.product_name
+having sum(od.quantity) > 200
+order by 3 asc

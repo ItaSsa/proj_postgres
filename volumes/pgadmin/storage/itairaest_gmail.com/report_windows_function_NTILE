@@ -1,0 +1,5 @@
+SELECT first_name, last_name, title,
+   NTILE(3) OVER (ORDER BY first_name) AS group_number
+FROM employees;
+
+
