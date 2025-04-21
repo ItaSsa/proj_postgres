@@ -6,7 +6,9 @@ services:
     ports:
       - "15432:5432"
     volumes:
-      - /home/itaira/proj_sql/volumes/PostgreSQL:/var/lib/postgresql/data 
+      - ./init-db/northwind.sql:/tmp/northwind.sql
+      - ./init-db/create_db.sh:/docker-entrypoint-initdb.d/create_db.sh
+      - /home/itaira/proj_sql/volumes/PostgreSQL:/var/lib/postgresql/data
     networks:
       - postgres-compose-network
       
