@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "Postgres2019!"
+    ports:
+      - "15432:5432"
+    volumes:
+      - /home/itaira/proj_sql/volumes/PostgreSQL:/var/lib/postgresql/data 
+    networks:
+      - postgres-compose-network
+      
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "itairaest@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "PgAdmin2019!"
+    volumes:
+      - /home/itaira/proj_sql/proj_postgres/volumes/pgadmin:/var/lib/pgadmin
+    ports:
+      - "16543:80"
+    depends_on:
+      - db
+    networks:
+      - postgres-compose-network
+networks: 
+  postgres-compose-network:
+      driver: bridge

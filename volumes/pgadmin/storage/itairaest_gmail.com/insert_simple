@@ -1,0 +1,6 @@
+rollback;
+begin ;
+	insert into suppliers2
+	select * from suppliers
+	where company_name like 'P%';
+commit;
