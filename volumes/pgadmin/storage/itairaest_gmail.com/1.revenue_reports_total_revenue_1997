@@ -1,0 +1,15 @@
+WITH revenue_per_order AS (
+	select distinct  o.order_id,
+		   o.order_date,
+		   EXTRACT(YEAR FROM order_date) as year,
+		   SUM((od.unit_price * quantity)
+		   		* (1.0 - od.discount) ) OVER (PARTITION BY o.order_id)as total_revenue
+	from orders o
+		left join order_details od
+			on o.order_id = od.order_id
+)
+SELECT year,
+		sum(total_revenue) as total_revenue_year
+FROM revenue_per_order
+WHERE  year = '1997'
+group by year

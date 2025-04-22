@@ -1,0 +1,23 @@
+WITH amount_per_customer as(
+	select DISTINCT o.customer_id,
+			   EXTRACT(YEAR FROM o.order_date) as Year,
+			   EXTRACT(Month FROM o.order_date) as Month,
+			   SUM((od.unit_price * od.quantity) * (1.0 - od.discount)) OVER (PARTITION BY o.order_id) as amount_month_paid
+		from orders o
+			left join order_details od
+				on o.order_id = od.order_id
+	
+	-- where o.customer_id in( 'RICAR', 'FOLKO')
+),
+Accumulated_year_month AS(
+	select distinct
+		customer_id,
+		Year,
+		Month,
+		amount_month_paid,
+		sum(amount_month_paid) OVER (PARTITION BY customer_id,Year order by Month) as Accumulated_YTD
+	from amount_per_customer
+)
+select*
+from Accumulated_year_month
+order by customer_id,year,month

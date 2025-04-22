@@ -1,0 +1,28 @@
+--Divide the customers into 5 groups based on the total amount paid.
+-- What is the total amount each customer has paid so far?
+-- Focus only on customers in groups 3, 4, and 5 for a special marketing analysis.
+WITH amount_per_customer AS (
+	select DISTINCT o.customer_id,
+		   EXTRACT(YEAR FROM o.order_date) as Year,
+		   EXTRACT(Month FROM o.order_date) as Month,
+		   SUM((od.unit_price * od.quantity) * (1.0 - od.discount)) OVER (PARTITION BY o.order_id) as amout_paid
+	from orders o
+		left join order_details od
+			on o.order_id = od.order_id
+
+)
+,
+Acumulated_Amount AS (
+	select distinct customer_id,
+		   SUM(amout_paid) OVER (PARTITION BY customer_id ) as amount_paid
+		   
+	from amount_per_customer
+), groups_amount as(
+	select customer_id,
+			amount_paid,
+			NTILE(5) OVER (ORDER BY amount_paid) as group_number
+	from Acumulated_Amount
+) 
+select *
+from groups_amount
+where group_number >= 3

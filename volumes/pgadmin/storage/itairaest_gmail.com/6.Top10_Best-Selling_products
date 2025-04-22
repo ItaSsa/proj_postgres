@@ -1,0 +1,14 @@
+--  Top 10 Best-Selling Products
+With product_sales as (
+	SELECT products.product_name, 
+	SUM(order_details.unit_price * order_details.quantity * (1.0 - order_details.discount)) AS sales
+	FROM products
+	INNER JOIN order_details ON order_details.product_id = products.product_id
+	GROUP BY products.product_name
+	ORDER BY sales DESC
+)
+select product_name,
+        sales,
+		RANK() OVER (order by sales desc) as rank
+from product_sales
+LIMIT 10;

@@ -1,0 +1,34 @@
+WITH MonthlyRevenue AS (
+    SELECT
+        EXTRACT(YEAR FROM orders.order_date) AS Year,
+        EXTRACT(MONTH FROM orders.order_date) AS Month,
+        SUM(order_details.unit_price * order_details.quantity * (1.0 - order_details.discount)) AS Revenue_Monthly
+	FROM
+        orders
+    INNER JOIN
+        order_details ON orders.order_id = order_details.order_id
+    GROUP BY
+        EXTRACT(YEAR FROM orders.order_date),
+        EXTRACT(MONTH FROM orders.order_date)
+),
+AccumulatedRevenue AS (
+    SELECT
+        Year,
+        Month,
+        Revenue_Monthly,
+        SUM(Revenue_Monthly) OVER (PARTITION BY Year ORDER BY Month) AS Revenue_YTD
+    FROM
+        MonthlyRevenue
+)
+SELECT
+    Year,
+    Month,
+    Revenue_Monthly,
+	Revenue_Monthly - LAG(Revenue_Monthly) OVER (PARTITION BY Year ORDER BY Month) AS Monthly_Difference,
+	Revenue_YTD,
+    ((Revenue_Monthly - LAG(Revenue_Monthly) OVER (PARTITION BY Year ORDER BY Month)) 
+		/ LAG(Revenue_Monthly) OVER (PARTITION BY Year ORDER BY Month) * 100)::numeric(5,2)  AS  Monthly_Percentage_Change
+FROM
+    AccumulatedRevenue
+ORDER BY
+    Year, Month;

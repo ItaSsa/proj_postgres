@@ -7,16 +7,14 @@ This repository aims to present advanced reports built in SQL. The analyses prov
 ## Reports We Will Create
 
 1. **Revenue Reports**
-   - What was the total revenue in the year 1997?  
-   - Perform a monthly growth analysis and calculate the YTD (Year-To-Date).
+   - What was the total revenue in the year 1997? [1.revenue_reports_total_revenue_1997](volumes/pgadmin/storage/itairaest_gmail.com/1.revenue_reports_total_revenue_1997)
+   - Perform a monthly growth analysis and calculate the YTD (Year-To-Date).[2.revenue_reports_YTD_analysis](volumes/pgadmin/storage/itairaest_gmail.com/2.revenue_reports_YTD_analysis)
 
 2. **Customer Segmentation**
-   - What is the total amount each customer has paid so far?  
-   - Divide the customers into 5 groups based on the total amount paid.  
-   - Focus only on customers in groups 3, 4, and 5 for a special marketing analysis.
-
-3. **UK Customers Who Paid More Than $1,000**
-   - Which UK customers have paid more than $1,000?
+   - What is the total amount each customer has paid so far?[customer_segmentation_report_amount_customer](volumes/pgadmin/storage/itairaest_gmail.com/3.customer_segmentation_report_amount_customer)  
+   - Divide the customers into 5 groups based on the total amount paid.[customer_segmentation_report_5groups_for_paid_amount](volumes/pgadmin/storage/itairaest_gmail.com/4.customer_segmentation_report_5groups_for_paid_amount)  
+   - Focus only on customers in groups 3, 4, and 5 for a special marketing analysis.[5.customer_segmentation_report_focus_3-5groups](volumes/pgadmin/storage/itairaest_gmail.com/5.customer_segmentation_report_focus_3-5groups)
+   - Top 10 Best-Selling Products (6.Top10_Best-Selling_products)[volumes/pgadmin/storage/itairaest_gmail.com/6.Top10_Best-Selling_products]
 
 ## Context
 
