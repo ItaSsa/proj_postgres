@@ -14,7 +14,7 @@ This repository aims to present advanced reports built in SQL. The analyses prov
    - What is the total amount each customer has paid so far?[customer_segmentation_report_amount_customer](volumes/pgadmin/storage/itairaest_gmail.com/3.customer_segmentation_report_amount_customer)  
    - Divide the customers into 5 groups based on the total amount paid.[customer_segmentation_report_5groups_for_paid_amount](volumes/pgadmin/storage/itairaest_gmail.com/4.customer_segmentation_report_5groups_for_paid_amount)  
    - Focus only on customers in groups 3, 4, and 5 for a special marketing analysis.[5.customer_segmentation_report_focus_3-5groups](volumes/pgadmin/storage/itairaest_gmail.com/5.customer_segmentation_report_focus_3-5groups)
-   - Top 10 Best-Selling Products (6.Top10_Best-Selling_products)[volumes/pgadmin/storage/itairaest_gmail.com/6.Top10_Best-Selling_products]
+   - Top 10 Best-Selling Products [6.Top10_Best-Selling_products](volumes/pgadmin/storage/itairaest_gmail.com/6Top10_Best-Selling_products)
 
 ## Context
 
